@@ -1,0 +1,40 @@
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Dependency directories (remove the comment if you use vendoring)
+# vendor/
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.swp
+
+# macOS system files
+.DS_Store
+
+# Output and cache folders
+output/
+videos/
+
+# Test data (if you don't want to track sample files)
+testdata/*.mp4
+testdata/*.vtt
+
+# Logs and temp files
+*.log
+*.tmp
+*.part
+*.ytdl
+
+# Exclude all in output subfolders
+ytcli/output/
+
+# Exclude nested output temp files
+output/**/*.part
+output/**/*.ytdl
