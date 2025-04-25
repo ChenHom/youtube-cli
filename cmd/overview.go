@@ -65,6 +65,11 @@ var overviewCmd = &cobra.Command{
 				}
 				overviewChapter = sel
 				fmt.Printf("已選擇章節 %d\n", overviewChapter)
+				// 立即顯示該章節內容
+				if overviewChapter >= 0 && overviewChapter < len(chapters) {
+					fmt.Println("\n▶ 章節全文：")
+					fmt.Println(chapters[overviewChapter].Text)
+				}
 			}
 			// 產生並存檔 overview
 			outputPath := filepath.Join(filepath.Dir(overviewTranscript), "overview.txt")

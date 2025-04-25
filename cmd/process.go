@@ -26,9 +26,13 @@ var processCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		// 執行 pipeline
+		// 若未指定 --model，預設用 config.Model
+		model := processModel
+		if cmd.Flags().Lookup("model").Changed == false {
+			model = cfg.Model
+		}
 		fmt.Printf("Processing %s -> %s\n", processURL, processOutput)
-		return pipeline.Process(cfg.OpenAIKey, processURL, processOutput, processModel, doChapters, doOverview, doSummary, deepDiveChapter, processRelatedChapter)
+		return pipeline.Process(cfg.OpenAIKey, processURL, processOutput, model, doChapters, doOverview, doSummary, deepDiveChapter, processRelatedChapter)
 	},
 }
 
@@ -36,7 +40,7 @@ func init() {
 	rootCmd.AddCommand(processCmd)
 	processCmd.Flags().StringVar(&processURL, "url", "", "YouTube 影片網址")
 	processCmd.Flags().StringVar(&processOutput, "output", "", "輸出資料夾路徑")
-	processCmd.Flags().StringVar(&processModel, "model", "whisper", "Whisper 模型名稱")
+	processCmd.Flags().StringVar(&processModel, "model", "", "OpenAI/Whisper 模型名稱，預設讀取 OPENAI_MODEL")
 	processCmd.Flags().BoolVar(&doChapters, "chapters", false, "是否偵測章節")
 	processCmd.Flags().BoolVar(&doOverview, "overview", false, "是否列出章節概要")
 	processCmd.Flags().BoolVar(&doSummary, "summary", false, "是否生成影片摘要")

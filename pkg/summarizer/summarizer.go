@@ -11,7 +11,7 @@ import (
 )
 
 // Overview 讀取 transcriptPath，將首行作為章節概要輸出到 outputPath
-func Overview(apiKey, transcriptPath, outputPath string) error {
+func Overview(apiKey, transcriptPath, outputPath, model string) error {
 	// 測試 stub: dummy-key 時只輸出首行文字
 	if apiKey == "dummy-key" {
 		f, err := os.Open(transcriptPath)
@@ -31,7 +31,6 @@ func Overview(apiKey, transcriptPath, outputPath string) error {
 		// 若無其他內容，寫入預設空 overview
 		return os.WriteFile(outputPath, []byte("Overview:\n"), 0644)
 	}
-
 	// 讀取所有文字
 	data, err := os.ReadFile(transcriptPath)
 	if err != nil {
@@ -40,7 +39,7 @@ func Overview(apiKey, transcriptPath, outputPath string) error {
 	// 準備 GPT 請求
 	client := openai.NewClient(apiKey)
 	req := openai.ChatCompletionRequest{
-		Model: "gpt-3.5-turbo",
+		Model: model,
 		Messages: []openai.ChatCompletionMessage{
 			{Role: openai.ChatMessageRoleSystem, Content: "You are a helpful assistant for generating overviews."},
 			{Role: openai.ChatMessageRoleUser, Content: fmt.Sprintf("Provide an overview of the following transcript:\n%s", string(data))},
@@ -55,20 +54,18 @@ func Overview(apiKey, transcriptPath, outputPath string) error {
 	return os.WriteFile(outputPath, []byte(output), 0644)
 }
 
-// Summarize 生成影片摘要，輸出到 outputPath
-func Summarize(apiKey, transcriptPath, outputPath string) error {
+func Summarize(apiKey, transcriptPath, outputPath, model string) error {
 	// 測試 stub: dummy-key 時直接輸出 placeholder
 	if apiKey == "dummy-key" {
 		return os.WriteFile(outputPath, []byte("Summary placeholder\n"), 0644)
 	}
-
 	data, err := os.ReadFile(transcriptPath)
 	if err != nil {
 		return err
 	}
 	client := openai.NewClient(apiKey)
 	req := openai.ChatCompletionRequest{
-		Model: "gpt-3.5-turbo",
+		Model: model,
 		Messages: []openai.ChatCompletionMessage{
 			{Role: openai.ChatMessageRoleSystem, Content: "You are a helpful assistant for summarization."},
 			{Role: openai.ChatMessageRoleUser, Content: fmt.Sprintf("Summarize the following transcript in concise text (<500 words):\n%s", string(data))},

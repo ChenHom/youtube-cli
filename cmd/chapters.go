@@ -27,9 +27,7 @@ var chaptersCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		// 顯示偵測到的章節數
 		fmt.Printf("共偵測到 %d 個章節\n", len(chapters))
-		// 多選互動式選單
 		if len(chaptersSelected) == 0 {
 			labels := make([]string, len(chapters))
 			for i, ch := range chapters {
@@ -42,6 +40,12 @@ var chaptersCmd = &cobra.Command{
 			}
 			chaptersSelected = sel
 			fmt.Printf("已選取章節索引: %v\n", chaptersSelected)
+		}
+		// 顯示所選章節內容
+		for _, idx := range chaptersSelected {
+			if idx >= 0 && idx < len(chapters) {
+				fmt.Printf("\n--- Chapter %d ---\n%s\n", idx, chapters[idx].Text)
+			}
 		}
 		data, err := json.MarshalIndent(chapters, "", "  ")
 		if err != nil {

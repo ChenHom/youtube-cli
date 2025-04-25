@@ -23,7 +23,7 @@ func DeepDive(apiKey, transcriptPath string, chapter int, outputPath string) err
 	// 呼叫 GPT 生成深入分析
 	client := openai.NewClient(apiKey)
 	req := openai.ChatCompletionRequest{
-		Model: "gpt-3.5-turbo",
+		Model: "gpt-4o-mini",
 		Messages: []openai.ChatCompletionMessage{
 			{Role: openai.ChatMessageRoleSystem, Content: "You are an assistant for detailed analysis of transcripts."},
 			{Role: openai.ChatMessageRoleUser, Content: fmt.Sprintf("Provide a deep dive analysis for chapter %d of the following transcript:\n%s", chapter, string(data))},
@@ -51,7 +51,7 @@ func Related(apiKey, transcriptPath string, chapter int, outputPath string) erro
 	// 呼叫 GPT 生成相關主題列表
 	client := openai.NewClient(apiKey)
 	req := openai.ChatCompletionRequest{
-		Model: "gpt-3.5-turbo",
+		Model: "gpt-4o-mini",
 		Messages: []openai.ChatCompletionMessage{
 			{Role: openai.ChatMessageRoleSystem, Content: "You are an assistant for suggesting related knowledge topics."},
 			{Role: openai.ChatMessageRoleUser, Content: fmt.Sprintf("List 5 related knowledge topics for chapter %d of the following transcript:\n%s", chapter, string(data))},

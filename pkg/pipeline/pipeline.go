@@ -86,7 +86,7 @@ func Process(apiKey, urlStr, outputDir, model string, doChapters, doOverview, do
 	// Overview
 	if doOverview {
 		overviewPath := filepath.Join(runDir, "overview.txt")
-		if err := summarizer.Overview(apiKey, transcriptPath, overviewPath); err != nil {
+		if err := summarizer.Overview(apiKey, transcriptPath, overviewPath, model); err != nil {
 			return fmt.Errorf("overview failed: %w", err)
 		}
 		// 翻譯 overview
@@ -97,7 +97,7 @@ func Process(apiKey, urlStr, outputDir, model string, doChapters, doOverview, do
 	// Summary
 	if doSummary {
 		summaryPath := filepath.Join(runDir, "summary.txt")
-		if err := summarizer.Summarize(apiKey, transcriptPath, summaryPath); err != nil {
+		if err := summarizer.Summarize(apiKey, transcriptPath, summaryPath, model); err != nil {
 			return fmt.Errorf("summary failed: %w", err)
 		}
 		// 翻譯 summary

@@ -14,6 +14,7 @@ type Chapter struct {
 	Title string
 	Start string
 	End   string
+	Text  string
 }
 
 // configuration driven by spec: mode=paragraph, time_gap_ms, transitions, use_embedding, title_generation
@@ -143,7 +144,7 @@ func DetectParagraphChapters(transcriptPath string) ([]Chapter, error) {
 			if idx := strings.Index(full, "。"); idx != -1 {
 				title = full[:idx+len("。")]
 			}
-			chapters = append(chapters, Chapter{Title: title, Start: formatTimestamp(paragraphStart), End: formatTimestamp(prev.end)})
+			chapters = append(chapters, Chapter{Title: title, Start: formatTimestamp(paragraphStart), End: formatTimestamp(prev.end), Text: full})
 			currText.Reset()
 			currText.WriteString(c.text)
 			paragraphStart = c.start
@@ -158,6 +159,6 @@ func DetectParagraphChapters(transcriptPath string) ([]Chapter, error) {
 	if idx := strings.Index(full, "。"); idx != -1 {
 		title = full[:idx+len("。")]
 	}
-	chapters = append(chapters, Chapter{Title: title, Start: formatTimestamp(paragraphStart), End: formatTimestamp(prev.end)})
+	chapters = append(chapters, Chapter{Title: title, Start: formatTimestamp(paragraphStart), End: formatTimestamp(prev.end), Text: full})
 	return chapters, nil
 }
