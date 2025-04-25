@@ -63,7 +63,7 @@ ytcli related --query <topic>
 ytcli process --url <YouTube_URL> --output <path> [--model whisper] [--chapters] [--overview] [--summary] [--deep-dive <n>] [--related <topic>]
 ```
 
-## 全流程處理示例
+## 全流程處理範例
 
 ```bash
 ytcli process --url https://youtu.be/dQw4w9WgXcQ --output ./output --chapters --overview --summary
