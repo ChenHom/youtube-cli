@@ -8,6 +8,7 @@ import (
 )
 
 var cfgFile string
+var lang string
 
 var rootCmd = &cobra.Command{
 	Use:   "ytcli",
@@ -26,6 +27,8 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.ytcli.yaml)")
 	viper.BindPFlag("config", rootCmd.PersistentFlags().Lookup("config"))
+	rootCmd.PersistentFlags().StringVar(&lang, "lang", "zh-TW", "輸出文字說明語言，預設正體中文；可選 en、ja、…")
+	viper.BindPFlag("lang", rootCmd.PersistentFlags().Lookup("lang"))
 }
 
 func initConfig() {

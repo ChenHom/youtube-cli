@@ -18,49 +18,50 @@ go install github.com/ChenHom/ytcli/cmd/ytcli@latest
 ### 下載影片
 
 ```bash
-ytcli download --url <YouTube_URL> --output <path>
+ytcli download --url <YouTube_URL> --output <path> [--lang en]
 ```
 
 ### 轉錄字幕
 
 ```bash
-ytcli transcribe --input <video.mp4> [--model whisper]
+ytcli transcribe --input <video.mp4> [--model whisper] [--lang ja]
 ```
 
 ### 偵測章節
 
 ```bash
-ytcli chapters --transcript <file.vtt>
+ytcli chapters --transcript <file.vtt> [--chapters-selected 0,2] [--lang en]
 ```
 
 ### 列出章節概要
 
 ```bash
-ytcli overview --transcript <file.vtt>
+ytcli overview --transcript <file.vtt> [--chapter <n>] [--lang zh-TW]
 ```
 
 ### 生成摘要
 
 ```bash
-ytcli summary --transcript <file.vtt>
+ytcli summary --transcript <file.vtt> [--chapter <n>] [--lang zh-TW]
 ```
 
 ### 深入探討章節
 
 ```bash
-ytcli deep-dive --transcript <file.vtt> --chapter <n>
+ytcli deep-dive --transcript <file.vtt> [--chapter <n>] [--lang zh-TW]
 ```
 
 ### 檢索相關知識
 
 ```bash
-ytcli related --query <topic>
+ytcli related --transcript <file.vtt> --chapter <n> [--lang zh-TW]
 ```
 
 ### 一鍵全流程
 
 ```bash
-ytcli process --url <YouTube_URL> --output <path> [--model whisper] [--chapters] [--overview] [--summary] [--deep-dive <n>] [--related <topic>]
+ytcli process --url <YouTube_URL> --output <path> [--model whisper] \
+  [--chapters] [--overview] [--summary] [--deep-dive <n>] [--related <n>] [--lang en]
 ```
 
 ## 全流程處理示例
@@ -75,6 +76,8 @@ ytcli process --url https://youtu.be/dQw4w9WgXcQ --output ./output --chapters --
 
 - github.com/spf13/cobra
 - github.com/spf13/viper
+- github.com/briandowns/spinner    # 進度條顯示
+- github.com/AlecAivazis/survey/v2 # 互動式選單
 - OpenAI Go SDK (`github.com/sashabaranov/go-openai`)
 - 需要外部命令: `yt-dlp`, `ffmpeg`
 

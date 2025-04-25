@@ -38,3 +38,4 @@ ytcli/output/
 # Exclude nested output temp files
 output/**/*.part
 output/**/*.ytdl
+ytcli
