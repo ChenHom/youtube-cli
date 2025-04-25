@@ -30,7 +30,7 @@ func TranslateFile(apiKey, filePath, targetLang string) error {
 	req := openai.ChatCompletionRequest{
 		Model: openai.GPT3Dot5Turbo,
 		Messages: []openai.ChatCompletionMessage{
-			{Role: openai.ChatMessageRoleSystem, Content: fmt.Sprintf("You are a translation engine. Translate the following text to %s while preserving formatting and file structure.", targetLang)},
+			{Role: openai.ChatMessageRoleSystem, Content: fmt.Sprintf("You are a translation engine. Translate the following text to %s while preserving formatting and file structure. Do not include any markdown code fences in the output.", targetLang)},
 			{Role: openai.ChatMessageRoleUser, Content: string(data)},
 		},
 	}
