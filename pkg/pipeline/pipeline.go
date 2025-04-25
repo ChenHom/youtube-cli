@@ -68,7 +68,7 @@ func Process(apiKey, urlStr, outputDir, model string, doChapters, doOverview, do
 	fmt.Println("Transcript:", transcriptPath)
 	// 偵測章節
 	if doChapters {
-		chapters, err := chapterizer.DetectChapters(transcriptPath)
+		chapters, err := chapterizer.DetectParagraphChapters(transcriptPath)
 		if err != nil {
 			return fmt.Errorf("detect chapters failed: %w", err)
 		}

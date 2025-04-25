@@ -8,9 +8,9 @@ import (
 
 func TestDetectChaptersFromTranscript(t *testing.T) {
 	transcript := "../../testdata/sample.vtt"
-	chapters, err := chapterizer.DetectChapters(transcript)
+	chapters, err := chapterizer.DetectParagraphChapters(transcript)
 	if err != nil {
-		t.Fatalf("DetectChapters failed: %v", err)
+		t.Fatalf("DetectParagraphChapters failed: %v", err)
 	}
 	if len(chapters) == 0 {
 		t.Errorf("expected at least one chapter, got 0")

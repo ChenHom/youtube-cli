@@ -23,7 +23,7 @@ var chaptersCmd = &cobra.Command{
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		chapters, err := chapterizer.DetectChapters(chaptersTranscript)
+		chapters, err := chapterizer.DetectParagraphChapters(chaptersTranscript)
 		if err != nil {
 			return err
 		}
